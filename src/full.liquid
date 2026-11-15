@@ -13,7 +13,7 @@
       </div>
       <span class="header-category label label--small lg:label--large font--mono">API / CONFIG</span>
     </div>
-    <div class="description lg:description--large" style="color: var(--framework-border-strong, #000000);">
+    <div class="error-message description lg:description--large">
       {{ var_error }}
     </div>
   </div>
@@ -29,7 +29,7 @@
     <div class="photo-frame h--[25cqh] portrait:h--[15cqh]">
       {% if var_cover_image and var_cover_image != "" %}
       <img class="image-dither" src="{{ var_cover_image }}" alt="Cover Art {{ slot }}" onerror="this.style.display='none'; if(this.nextElementSibling){this.nextElementSibling.style.display='flex';}">
-      <div class="cover-fallback font--mono" style="display: none;">
+      <div class="cover-fallback cover-fallback--hidden font--mono">
         <span class="value value--xxsmall lg:value--small value--tnums">0{{ slot }}</span>
         <span class="cover-fallback-tag label label--small">WR // SRC</span>
       </div>
@@ -133,7 +133,7 @@
     </div>
 
     <!-- Bottom Dot Grille -->
-    <div class="abstract-dots" style="margin-top: 10px;"></div>
+    <div class="abstract-dots abstract-dots--spaced"></div>
   </div>
 </div>
 </div>

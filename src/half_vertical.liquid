@@ -13,7 +13,7 @@
       </div>
       <span class="header-category label label--small lg:label--large font--mono">API / CONFIG</span>
     </div>
-    <div class="description lg:description--large" style="color: var(--framework-border-strong, #000000);">
+    <div class="error-message description lg:description--large">
       {{ var_error }}
     </div>
   </div>
@@ -33,11 +33,11 @@
 
   <!-- Hero World Record with Cover Art -->
   <div class="hero-wr">
-    <div class="flex flex--row gap--small lg:gap--medium" style="align-items: center; min-width: 0;">
-      <div class="photo-frame h--[15cqh]" style="flex-shrink: 0;">
+    <div class="hv-hero-inner flex flex--row gap--small lg:gap--medium">
+      <div class="photo-frame photo-frame--fixed h--[15cqh]">
         {% if var_cover_image and var_cover_image != "" %}
         <img class="image-dither" src="{{ var_cover_image }}" alt="Cover Art" onerror="this.style.display='none'; if(this.nextElementSibling){this.nextElementSibling.style.display='flex';}">
-        <div class="cover-fallback font--mono" style="display: none;">
+        <div class="cover-fallback cover-fallback--hidden font--mono">
           <span class="value value--xxsmall value--tnums">WR</span>
         </div>
         {% else %}

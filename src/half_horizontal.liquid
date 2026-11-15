@@ -13,7 +13,7 @@
       </div>
       <span class="header-category label label--small lg:label--large font--mono">API / CONFIG</span>
     </div>
-    <div class="description lg:description--large" style="color: var(--framework-border-strong, #000000);">
+    <div class="error-message description lg:description--large">
       {{ var_error }}
     </div>
   </div>
@@ -28,7 +28,7 @@
     <div class="photo-frame h--[65cqh] portrait:h--[18cqh]">
       {% if var_cover_image and var_cover_image != "" %}
       <img class="image-dither" src="{{ var_cover_image }}" alt="Cover Art" onerror="this.style.display='none'; if(this.nextElementSibling){this.nextElementSibling.style.display='flex';}">
-      <div class="cover-fallback font--mono" style="display: none;">
+      <div class="cover-fallback cover-fallback--hidden font--mono">
         <span class="value value--xxsmall lg:value--small value--tnums">01</span>
         <span class="cover-fallback-tag label label--small">WR // SRC</span>
       </div>
@@ -51,9 +51,9 @@
       <span class="header-category label label--small lg:label--large font--mono">{{ var_category_name }}</span>
     </div>
 
-    <div class="flex flex--row portrait:flex--col w--full gap--small lg:gap--medium" style="flex: 1; align-items: stretch;">
+    <div class="half-split-row flex flex--row portrait:flex--col w--full gap--small lg:gap--medium">
       <!-- World Record Card -->
-      <div class="hero-wr half-split-col flex--col" style="align-items: flex-start; justify-content: space-between;">
+      <div class="hero-wr hero-wr--stacked half-split-col flex--col">
         <div class="wr-meta w--full">
           <span class="label label--small lg:label--large braun-kicker">WORLD RECORD</span>
           <span class="title title--small lg:title--large" data-clamp="1">{{ var_wr_holder }}</span>
@@ -65,7 +65,7 @@
       </div>
 
       <!-- Top 3 Runs -->
-      <div class="half-split-col flex flex--col gap--xsmall lg:gap--small" style="justify-content: center;">
+      <div class="half-split-col half-runs-col flex flex--col gap--xsmall lg:gap--small">
         {% if var_top_runs.size > 0 %}
         {% for run in var_top_runs %}
           <div class="braun-item">
