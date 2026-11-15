@@ -1,0 +1,17 @@
+# TRMNL Local Development Server Config (used by `trmnlp serve`, not pushed to TRMNL)
+watch:
+  - src
+  - .trmnlp.yml
+
+custom_fields:
+  game: celeste
+  category: All_Cassettes
+
+variables:
+  trmnl:
+    plugin_settings:
+      custom_fields_values:
+        game: celeste
+        category: All_Cassettes
+
+time_zone: Europe/Brussels

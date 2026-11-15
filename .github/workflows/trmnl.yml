@@ -1,0 +1,38 @@
+name: TRMNL Sync
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: gem install trmnl_preview
+      - run: trmnlp lint
+
+  push:
+    needs: lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - name: Verify plugin ID is configured in src/settings.yml
+        run: |
+          if ! grep -qE '^id:[[:space:]]*[0-9]+' src/settings.yml; then
+            echo "::error::Set your numeric 'id:' in src/settings.yml before pushing to main so trmnlp updates the existing TRMNL plugin instead of creating duplicates."
+            exit 1
+          fi
+      - run: gem install trmnl_preview
+      - run: trmnlp push --force
+        env:
+          TRMNL_API_KEY: ${{ secrets.TRMNL_API_KEY }}

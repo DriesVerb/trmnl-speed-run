@@ -1,0 +1,31 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.1.1
+serverless_language: node
+polling_url: "https://www.speedrun.com/api/v1/games/{{game}}/records?top=3&scope=full-game&embed=players,game.platforms,category&max=200"
+polling_headers: ''
+polling_body: ''
+# Uncomment and set your numeric TRMNL plugin ID (from your trmnl.com plugin URL or Export ZIP)
+# so `trmnlp push` updates the existing plugin instead of creating duplicates:
+# id: 123456
+name: Speedrun Leaderboard
+refresh_interval: 15
+custom_fields:
+- keyname: game
+  name: Game Abbreviation
+  field_type: string
+  default: sm64
+  placeholder: sm64
+  description: Enter the game's URL slug/abbreviation. <strong>Do not paste the full URL!</strong>
+  help_text: E.g., for <code>https://www.speedrun.com/<strong>sm64</strong></code>, enter only <strong>sm64</strong>.
+- keyname: category
+  name: Category Name or ID
+  field_type: string
+  default: 120_Star
+  placeholder: 120_Star
+  description: Enter a full-game category name (e.g. <code>120 Star</code>, <code>All_Cassettes</code>, <code>Any%</code>) or its Speedrun.com category ID (e.g. <code>wkpoo02r</code>).
+  help_text: Spaces, underscores, or hyphens are all matched automatically against the game's full-game categories.
