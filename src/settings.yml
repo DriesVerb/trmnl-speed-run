@@ -6,12 +6,13 @@ static_data: ''
 polling_verb: get
 framework_version: 3.1.1
 serverless_language: node
-polling_url: "https://www.speedrun.com/api/v1/games/{{game}}/records?top=3&scope=full-game&embed=players,game.platforms,category&max=200"
+refresh_interval_floor:
+polling_url: https://www.speedrun.com/api/v1/games/{{game}}/records?top=3&scope=full-game&embed=players,game.platforms,category&max=200
 polling_headers: ''
 polling_body: ''
-id: 36fd8a30-5443-47f1-a8fc-a14c797fdbae
-name: Speedrun Leaderboard
-refresh_interval: 15
+id: 356815
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
 custom_fields:
 - keyname: game
   name: Game Abbreviation
@@ -27,3 +28,6 @@ custom_fields:
   placeholder: 120_Star
   description: Enter a full-game category name (e.g. <code>120 Star</code>, <code>All_Cassettes</code>, <code>Any%</code>) or its Speedrun.com category ID (e.g. <code>wkpoo02r</code>).
   help_text: Spaces, underscores, or hyphens are all matched automatically against the game's full-game categories.
+name: Speedrun Leaderboard
+description:
+refresh_interval: 15
