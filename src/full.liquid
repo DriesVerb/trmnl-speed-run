@@ -43,34 +43,15 @@
 {% endif %}
 
 <style>
-  .dashboard-layout {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-    gap: 30px;
-  }
-  
-  /* Left Column: Speaker Grille Pattern & Game Cover */
+  /* Left Column / Portrait Top Bar: Speaker Grille Pattern & Game Cover */
   .game-sidebar {
-    width: 180px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     position: relative;
     padding: 0;
-    gap: 15px;
   }
 
-  .centered-content {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-  }
-  
   /* Speaker Grille Pattern */
   .speaker-grille {
     position: absolute;
@@ -82,10 +63,10 @@
     background-size: 8px 8px;
     z-index: 1;
   }
-  
+
   .photo-frame {
-    width: 95px;
-    height: 134px;
+    aspect-ratio: 95 / 134;
+    width: auto;
     border: 3px solid var(--framework-border-strong, #000000);
     background-color: var(--white, #ffffff);
     display: flex;
@@ -93,9 +74,9 @@
     justify-content: center;
     overflow: hidden;
     z-index: 2;
-    box-shadow: 6px 6px 0px var(--framework-border-strong, #000000);
+    box-shadow: 5px 5px 0px var(--framework-border-strong, #000000);
   }
-  
+
   .photo-frame img {
     width: 100%;
     height: 100%;
@@ -117,16 +98,8 @@
   }
 
   .cover-fallback-tag {
-    font-size: 9px;
-    font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-  }
-
-  .cover-fallback-mark {
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1;
   }
 
   .error-panel {
@@ -151,41 +124,23 @@
     flex-direction: column;
     gap: 10px;
   }
-  
-  .sidebar-label {
-    z-index: 2;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    background: var(--white, #ffffff);
-    border: 2px solid var(--framework-border-strong, #000000);
-    padding: 4px 14px;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 0px var(--framework-border-strong, #000000);
-  }
-  
 
-
-  /* Right Column: Spaced out using flex gaps, rule-box stretches to fill layout */
+  /* Right Column: Main Stats */
   .main-stats {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     justify-content: flex-start;
-    height: 100%;
-    gap: 8px; /* Uniform spacing gap between elements */
   }
-  
+
   .header-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     border-bottom: 3px solid var(--framework-border-strong, #000000);
     padding-bottom: 8px;
   }
-  
+
   .header-title {
-    font-size: 22px;
     font-weight: 800;
     letter-spacing: -0.5px;
     text-transform: uppercase;
@@ -193,42 +148,47 @@
     align-items: center;
     gap: 8px;
   }
-  
+
   .braun-indicator {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: var(--framework-border-strong, #000000);
     display: inline-block;
+    flex-shrink: 0;
   }
 
   .header-category {
-    font-size: 13px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-  
+
   .hero-wr {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     padding: 10px 14px;
     border: 3px solid var(--framework-border-strong, #000000);
     background-color: var(--white, #ffffff);
     box-shadow: 5px 5px 0px var(--framework-border-strong, #000000);
   }
-  
+
   .wr-meta {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
   }
-  
-  .wr-value {
-    font-size: 34px;
-    font-weight: 300;
-    letter-spacing: -1px;
+
+  .braun-kicker {
+    letter-spacing: 1.5px;
+    font-weight: 800;
+  }
+
+  .wr-date {
+    color: var(--gray-10, #1a1a1a);
+    text-transform: uppercase;
   }
 
   /* Braun Parameter Spec Box */
@@ -237,10 +197,9 @@
     border: 3px solid var(--framework-border-strong, #000000);
     background-color: var(--white, #ffffff);
     text-align: center;
-    font-size: 11px;
     box-shadow: 5px 5px 0px var(--framework-border-strong, #000000);
   }
-  
+
   .spec-item {
     flex: 1;
     padding: 5px 4px;
@@ -248,85 +207,71 @@
     flex-direction: column;
     gap: 2px;
   }
-  
+
   .spec-item:not(:last-child) {
     border-right: 3px solid var(--framework-border-strong, #000000);
   }
-  
+
   .spec-label {
-    font-size: 8px;
     font-weight: 800;
     color: var(--gray-10, #1a1a1a);
     text-transform: uppercase;
   }
-  
+
   .spec-val {
     font-weight: bold;
     text-transform: uppercase;
   }
 
-  .leaderboard-list {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
   .braun-item {
     display: flex;
     align-items: center;
     border: 3px solid var(--framework-border-strong, #000000);
-    height: 36px;
+    min-height: 36px;
     background: var(--white, #ffffff);
     box-shadow: 4px 4px 0px var(--framework-border-strong, #000000);
   }
-  
+
   .braun-index {
     width: 44px;
-    height: 100%;
+    align-self: stretch;
     border-right: 3px solid var(--framework-border-strong, #000000);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 13px;
     background-color: var(--gray-50, #d4d4d4);
+    flex-shrink: 0;
   }
-  
+
   .braun-item-body {
     flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 14px;
+    gap: 10px;
+    padding: 4px 14px;
   }
-  
+
   .runner-name {
-    font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
   }
-  
+
   .run-date {
-    font-size: 11px;
     color: var(--gray-10, #1a1a1a);
     margin-left: 8px;
-  }
-  
-  .run-time {
-    font-weight: bold;
   }
 
   .rules-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     border-top: 3px double var(--framework-border-strong, #000000);
     padding-top: 8px;
   }
 
   .rules-body {
-    font-size: 11px;
-    line-height: 14px;
     color: var(--gray-10, #1a1a1a);
     font-style: italic;
     padding: 0 4px;
@@ -340,113 +285,6 @@
     background-size: 8px 8px;
     min-height: 10px;
   }
-
-  /* Responsive styling for larger screens like TRMNL X */
-  @media (min-width: 1024px) {
-    .main-stats {
-      gap: 14px;
-    }
-    .centered-content {
-      gap: 20px;
-    }
-    .header-title {
-      font-size: 28px;
-    }
-    .header-category {
-      font-size: 16px;
-    }
-    .hero-wr {
-      padding: 16px;
-    }
-    .wr-value {
-      font-size: 46px;
-    }
-    .spec-box {
-      font-size: 13px;
-    }
-    .spec-item {
-      padding: 10px 4px;
-    }
-    .spec-label {
-      font-size: 10px;
-    }
-    .spec-val {
-      font-size: 13px;
-    }
-    .leaderboard-list {
-      gap: 8px;
-    }
-    .braun-item {
-      height: 48px;
-    }
-    .braun-index {
-      font-size: 16px;
-    }
-    .runner-name {
-      font-size: 16px;
-    }
-    .run-date {
-      font-size: 13px;
-    }
-    .run-time {
-      font-size: 16px;
-    }
-    .rules-body {
-      font-size: 13px;
-      line-height: 16px;
-    }
-  }
-
-  /* Portrait orientation layout rules (Standard and TRMNL X) */
-  @media (orientation: portrait) {
-    .dashboard-layout {
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .game-sidebar {
-      width: 100%;
-      height: 140px;
-      flex-direction: row;
-      justify-content: center;
-      gap: 15px;
-    }
-    
-    .photo-frame {
-      width: 75px;
-      height: 106px;
-      box-shadow: 4px 4px 0px var(--framework-border-strong, #000000);
-    }
-    
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .main-stats {
-      width: 100%;
-    }
-  }
-
-  /* Scale up sizes specifically for TRMNL X in Portrait */
-  @media (min-width: 1024px) and (orientation: portrait) {
-    .game-sidebar {
-      height: 260px;
-      gap: 30px;
-    }
-    
-    .photo-frame {
-      width: 150px;
-      height: 212px;
-      border-width: 5px;
-      box-shadow: 10px 10px 0px var(--framework-border-strong, #000000);
-    }
-    
-    .dashboard-layout {
-      gap: 40px;
-    }
-  }
 </style>
 
 {% if var_error %}
@@ -456,11 +294,11 @@
     <div class="header-bar">
       <div class="header-title">
         <span class="braun-indicator"></span>
-        <span>SPEEDRUN TRACKER // ERROR</span>
+        <span class="title title--small lg:title--large">SPEEDRUN TRACKER // ERROR</span>
       </div>
-      <span class="header-category font--mono">API / CONFIG</span>
+      <span class="header-category label label--small lg:label--large font--mono">API / CONFIG</span>
     </div>
-    <div class="rules-body" style="font-style: normal; font-size: 14px; line-height: 20px; color: var(--framework-border-strong, #000000);">
+    <div class="description lg:description--large" style="color: var(--framework-border-strong, #000000);">
       {{ var_error }}
     </div>
   </div>
@@ -468,22 +306,22 @@
 </div>
 {% else %}
 <div class="layout layout--stretch">
-<div class="dashboard-layout">
-  <!-- Left Column: Speaker Grille & Photo Stack -->
-  <div class="game-sidebar">
+<div class="dashboard-layout flex flex--row portrait:flex--col w--full h--full gap--xlarge portrait:gap--large lg:portrait:gap--xxlarge">
+  <!-- Left Column / Portrait Top Bar: Speaker Grille & Photo Stack -->
+  <div class="game-sidebar flex flex--col portrait:flex--row w--[25cqw] portrait:w--full h--full portrait:h--[20cqh] lg:portrait:h--[18cqh] gap--medium lg:portrait:gap--xlarge">
     <div class="speaker-grille"></div>
     {% for slot in (1..3) %}
-    <div class="photo-frame">
+    <div class="photo-frame h--[25cqh] portrait:h--[15cqh]">
       {% if var_cover_image and var_cover_image != "" %}
       <img class="image-dither" src="{{ var_cover_image }}" alt="Cover Art {{ slot }}" onerror="this.style.display='none'; if(this.nextElementSibling){this.nextElementSibling.style.display='flex';}">
       <div class="cover-fallback font--mono" style="display: none;">
-        <span class="cover-fallback-mark">0{{ slot }}</span>
-        <span class="cover-fallback-tag">WR // SRC</span>
+        <span class="value value--xxsmall lg:value--small value--tnums">0{{ slot }}</span>
+        <span class="cover-fallback-tag label label--small">WR // SRC</span>
       </div>
       {% else %}
       <div class="cover-fallback font--mono">
-        <span class="cover-fallback-mark">0{{ slot }}</span>
-        <span class="cover-fallback-tag">WR // SRC</span>
+        <span class="value value--xxsmall lg:value--small value--tnums">0{{ slot }}</span>
+        <span class="cover-fallback-tag label label--small">WR // SRC</span>
       </div>
       {% endif %}
     </div>
@@ -491,29 +329,29 @@
   </div>
   
   <!-- Right Column: Live Leaderboards and Record Status -->
-  <div class="main-stats">
+  <div class="main-stats flex flex--col h--full portrait:w--full gap--small lg:gap--medium">
     <!-- Top Dot Grille -->
     <div class="abstract-dots"></div>
 
     <!-- Centered content block -->
-    <div class="centered-content">
+    <div class="centered-content flex flex--col w--full gap--medium lg:gap--large">
       <!-- Header bar -->
       <div class="header-bar">
         <div class="header-title">
           <span class="braun-indicator"></span>
-          <span>{{ var_game_name }}</span>
+          <span class="title title--small lg:title--large">{{ var_game_name }}</span>
         </div>
-        <span class="header-category font--mono">{{ var_category_name }}</span>
+        <span class="header-category label label--small lg:label--large font--mono">{{ var_category_name }}</span>
       </div>
 
       <!-- Hero World Record Stats Block -->
       <div class="hero-wr">
         <div class="wr-meta">
-          <span class="label" style="letter-spacing: 1.5px; font-size: 10px; font-weight: 800;">WORLD RECORD</span>
-          <span class="title title--small" style="font-size: 18px; margin-top: 3px;">{{ var_wr_holder }}</span>
-          <span class="description" style="font-size: 11px; margin-top: 2px; color: var(--gray-10); text-transform: uppercase;">{{ var_wr_date }}</span>
+          <span class="label label--small lg:label--large braun-kicker">WORLD RECORD</span>
+          <span class="title title--small lg:title--large">{{ var_wr_holder }}</span>
+          <span class="description lg:description--large wr-date">{{ var_wr_date }}</span>
         </div>
-        <div class="wr-value font--mono">
+        <div class="value value--small md:value--base lg:value--large value--tnums font--mono">
           {{ var_wr_time }}
         </div>
       </div>
@@ -521,39 +359,39 @@
       <!-- Braun Parameter Spec Box -->
       <div class="spec-box font--mono">
         <div class="spec-item">
-          <span class="spec-label">RELEASED</span>
-          <span class="spec-val">{{ var_released_year }}</span>
+          <span class="label label--small spec-label">RELEASED</span>
+          <span class="description lg:description--large spec-val">{{ var_released_year }}</span>
         </div>
         {% if var_system and var_system != "N/A" and var_system != "" %}
         <div class="spec-item">
-          <span class="spec-label">SYSTEM</span>
-          <span class="spec-val">{{ var_system }}</span>
+          <span class="label label--small spec-label">SYSTEM</span>
+          <span class="description lg:description--large spec-val">{{ var_system }}</span>
         </div>
         {% endif %}
         <div class="spec-item">
-          <span class="spec-label">TOTAL RUNS</span>
-          <span class="spec-val">{{ var_total_runs }}</span>
+          <span class="label label--small spec-label">TOTAL RUNS</span>
+          <span class="description lg:description--large spec-val">{{ var_total_runs }}</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">STATUS</span>
-          <span class="spec-val">ACTIVE</span>
+          <span class="label label--small spec-label">STATUS</span>
+          <span class="description lg:description--large spec-val">ACTIVE</span>
         </div>
       </div>
       
       <!-- Top Leaderboard List -->
-      <div class="leaderboard-list">
-        <span class="label label--small" style="letter-spacing: 1.5px; font-size: 9px; font-weight: 800; margin-bottom: 2px;">TOP RECORD LIST</span>
+      <div class="leaderboard-list flex flex--col gap--xsmall lg:gap--small">
+        <span class="label label--small lg:label--large braun-kicker">TOP RECORD LIST</span>
         
         {% if var_top_runs.size > 0 %}
         {% for run in var_top_runs %}
           <div class="braun-item">
-            <div class="braun-index font--mono">0{{ run.place }}</div>
+            <div class="braun-index font--mono label label--small lg:label--large">0{{ run.place }}</div>
             <div class="braun-item-body">
               <div>
-                <span class="runner-name">{{ run.runner }}</span>
-                <span class="run-date">{{ run.date }}</span>
+                <span class="title title--small lg:title--large runner-name">{{ run.runner }}</span>
+                <span class="description lg:description--large run-date">{{ run.date }}</span>
               </div>
-              <span class="run-time font--mono">
+              <span class="title title--small lg:title--large font--mono">
                 {{ run.time }}
               </span>
             </div>
@@ -561,10 +399,10 @@
         {% endfor %}
         {% else %}
           <div class="braun-item">
-            <div class="braun-index font--mono">--</div>
+            <div class="braun-index font--mono label label--small lg:label--large">--</div>
             <div class="braun-item-body">
-              <span class="runner-name">NO VERIFIED RUNS</span>
-              <span class="run-time font--mono">N/A</span>
+              <span class="title title--small lg:title--large runner-name">NO VERIFIED RUNS</span>
+              <span class="title title--small lg:title--large font--mono">N/A</span>
             </div>
           </div>
         {% endif %}
@@ -572,8 +410,8 @@
 
       <!-- Category Rules Content Box at the Bottom -->
       <div class="rules-container">
-        <span class="label label--small" style="letter-spacing: 1.5px; font-size: 9px; font-weight: 800;">CATEGORY RULES & DETAILS</span>
-        <div class="rules-body">
+        <span class="label label--small lg:label--large braun-kicker">CATEGORY RULES & DETAILS</span>
+        <div class="rules-body description lg:description--large" data-clamp="3">
           "{{ var_rules_summary }}"
         </div>
       </div>

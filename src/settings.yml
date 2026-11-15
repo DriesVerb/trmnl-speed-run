@@ -28,6 +28,12 @@ custom_fields:
   placeholder: 120_Star
   description: Enter a full-game category name (e.g. <code>120 Star</code>, <code>All_Cassettes</code>, <code>Any%</code>) or its Speedrun.com category ID (e.g. <code>wkpoo02r</code>).
   help_text: Spaces, underscores, or hyphens are all matched automatically against the game's full-game categories.
+- keyname: author_bio
+  name: About This Plugin
+  category: games
+  field_type: author_bio
+  description: Live Speedrun.com full-game world records and top 3 leaderboard runs in a Braun-inspired e-paper layout.
+  github_url: https://github.com/DriesVerb/trmnl-speed-run
 name: Speedrun Leaderboard
 description:
 refresh_interval: 15
