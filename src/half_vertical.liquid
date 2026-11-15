@@ -1,0 +1,104 @@
+<!--
+  TRMNL Liquid Template - Half Vertical View
+-->
+
+{% if var_error %}
+<div class="layout layout--stretch">
+<div class="error-panel">
+  <div class="error-card">
+    <div class="header-bar">
+      <div class="header-title">
+        <span class="braun-indicator"></span>
+        <span class="title title--small lg:title--large">SPEEDRUN TRACKER // ERROR</span>
+      </div>
+      <span class="header-category label label--small lg:label--large font--mono">API / CONFIG</span>
+    </div>
+    <div class="description lg:description--large" style="color: var(--framework-border-strong, #000000);">
+      {{ var_error }}
+    </div>
+  </div>
+</div>
+</div>
+{% else %}
+<div class="layout layout--stretch">
+<div class="main-stats flex flex--col w--full h--full gap--small lg:gap--medium">
+  <!-- Header bar -->
+  <div class="header-bar">
+    <div class="header-title">
+      <span class="braun-indicator"></span>
+      <span class="title title--small lg:title--large" data-clamp="1">{{ var_game_name }}</span>
+    </div>
+    <span class="header-category label label--small lg:label--large font--mono">{{ var_category_name }}</span>
+  </div>
+
+  <!-- Hero World Record with Cover Art -->
+  <div class="hero-wr">
+    <div class="flex flex--row gap--small lg:gap--medium" style="align-items: center; min-width: 0;">
+      <div class="photo-frame h--[15cqh]" style="flex-shrink: 0;">
+        {% if var_cover_image and var_cover_image != "" %}
+        <img class="image-dither" src="{{ var_cover_image }}" alt="Cover Art" onerror="this.style.display='none'; if(this.nextElementSibling){this.nextElementSibling.style.display='flex';}">
+        <div class="cover-fallback font--mono" style="display: none;">
+          <span class="value value--xxsmall value--tnums">WR</span>
+        </div>
+        {% else %}
+        <div class="cover-fallback font--mono">
+          <span class="value value--xxsmall value--tnums">WR</span>
+        </div>
+        {% endif %}
+      </div>
+      <div class="wr-meta">
+        <span class="label label--small lg:label--large braun-kicker">WORLD RECORD</span>
+        <span class="title title--small lg:title--large" data-clamp="1">{{ var_wr_holder }}</span>
+        <span class="value value--xsmall lg:value--base value--tnums font--mono">{{ var_wr_time }}</span>
+        <span class="description lg:description--large wr-date">{{ var_wr_date }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Braun Parameter Spec Box -->
+  <div class="spec-box font--mono">
+    <div class="spec-item">
+      <span class="label label--small spec-label">RELEASED</span>
+      <span class="description lg:description--large spec-val">{{ var_released_year }}</span>
+    </div>
+    {% if var_system and var_system != "N/A" and var_system != "" %}
+    <div class="spec-item">
+      <span class="label label--small spec-label">SYSTEM</span>
+      <span class="description lg:description--large spec-val" data-clamp="1">{{ var_system }}</span>
+    </div>
+    {% endif %}
+    <div class="spec-item">
+      <span class="label label--small spec-label">RUNS</span>
+      <span class="description lg:description--large spec-val">{{ var_total_runs }}</span>
+    </div>
+  </div>
+
+  <!-- Top 3 Leaderboard List -->
+  <div class="flex flex--col gap--xsmall lg:gap--small">
+    <span class="label label--small lg:label--large braun-kicker">TOP RECORD LIST</span>
+    {% if var_top_runs.size > 0 %}
+    {% for run in var_top_runs %}
+      <div class="braun-item">
+        <div class="braun-index font--mono label label--small lg:label--large">0{{ run.place }}</div>
+        <div class="braun-item-body">
+          <span class="title title--small lg:title--large runner-name" data-clamp="1">{{ run.runner }}</span>
+          <span class="title title--small lg:title--large font--mono">{{ run.time }}</span>
+        </div>
+      </div>
+    {% endfor %}
+    {% else %}
+      <div class="braun-item">
+        <div class="braun-index font--mono label label--small lg:label--large">--</div>
+        <div class="braun-item-body">
+          <span class="title title--small lg:title--large runner-name">NO VERIFIED RUNS</span>
+          <span class="title title--small lg:title--large font--mono">N/A</span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Bottom Dot Grille -->
+  <div class="abstract-dots"></div>
+</div>
+</div>
+{% endif %}

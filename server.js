@@ -89,10 +89,12 @@ app.get('/', async (req, res) => {
     };
     const transformedData = sandboxContext.transform(transformInput);
 
-    // Read template.liquid and render it
+    // Read shared.liquid (if present) and template.liquid and render them
     console.log("Rendering template.liquid with transformed data...");
+    const sharedPath = path.join(__dirname, 'src', 'shared.liquid');
+    const sharedContent = fs.existsSync(sharedPath) ? fs.readFileSync(sharedPath, 'utf8') + '\n' : '';
     const templatePath = path.join(__dirname, 'template.liquid');
-    const templateContent = fs.readFileSync(templatePath, 'utf8');
+    const templateContent = sharedContent + fs.readFileSync(templatePath, 'utf8');
     const renderedBody = await engine.parseAndRender(templateContent, transformedData);
 
     // Wrap the rendered body in the standard TRMNL layout for local viewing
