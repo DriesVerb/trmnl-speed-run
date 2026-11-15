@@ -9,9 +9,7 @@ serverless_language: node
 polling_url: "https://www.speedrun.com/api/v1/games/{{game}}/records?top=3&scope=full-game&embed=players,game.platforms,category&max=200"
 polling_headers: ''
 polling_body: ''
-# Uncomment and set your numeric TRMNL plugin ID (from your trmnl.com plugin URL or Export ZIP)
-# so `trmnlp push` updates the existing plugin instead of creating duplicates:
-# id: 123456
+id: 36fd8a30-5443-47f1-a8fc-a14c797fdbae
 name: Speedrun Leaderboard
 refresh_interval: 15
 custom_fields:

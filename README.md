@@ -13,9 +13,8 @@ TRMNL Private Plugin displaying live Speedrun.com full-game world records and to
 
 ## Connecting This Repo to GitHub + TRMNL Auto-Sync
 
-1. **Set your numeric TRMNL Plugin ID in `src/settings.yml`:**
-   - Open your **Speedrun Leaderboard** plugin on `trmnl.com` and find its numeric ID (from the page URL or exported `settings.yml`).
-   - Uncomment `id:` in `src/settings.yml` and replace `123456` with your actual plugin ID, then commit that change. *(The GitHub Action checks for a numeric `id:` so it updates your existing plugin instead of creating duplicates.)*
+1. **Plugin ID in `src/settings.yml`:**
+   - `id: 36fd8a30-5443-47f1-a8fc-a14c797fdbae` is configured in `src/settings.yml`. *(Note: if your TRMNL `Export` ZIP `settings.yml` or `/plugin_settings/<id>` URL uses a numeric ID instead, update `id:` to match before pushing to `main` so `trmnlp push` updates the existing plugin rather than creating a new one.)*
 
 2. **Create an empty GitHub repository and push `speed-run/`:**
    ```bash
